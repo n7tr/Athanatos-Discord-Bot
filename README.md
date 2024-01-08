@@ -3,8 +3,8 @@
 # Dynamic Discord Bot
 A powerful Discord nuke bot written on Go
 
-   * [Bot's authorization link](https://discord.com/api/oauth2/authorize?client_id=1167731957577285682&permissions=8&scope=bot)
-   * [Discord Server](https://discord.gg/96qcRkEfXC)
+   * [Bot's authorization link](https://discord.com/api/oauth2/authorize?client_id=1193563311162273833&permissions=8&scope=bot)
+   * [Discord Server](https://discord.gg/kAfuNzeUDx)
 <hr>
 
 # .env file
@@ -39,10 +39,11 @@ main.go - launches bot and ConnectAll handler from connector.go
 auto.go - launches bot's commands from commands folder
 
 # Commands
-The main command (.start) starts a nuking process. 
-.leave is for leaving the server immediately.
-.ban_all is for banning everyone from the server.
-
+<pre>
+	The main command (.start) starts a nuking process. 
+	.leave is for leaving the server immediately.
+	.ban_all is for banning everyone from the server.
+</pre>
 # Installation guide
 <pre>
 	1. Clone or download repository's source code
