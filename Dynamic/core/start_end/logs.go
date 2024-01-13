@@ -1,6 +1,8 @@
 package start_end
 
 import (
+	"Dynamic/core/requests"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -18,22 +20,13 @@ func Logs(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	godotenv.Load()
 	AVATAR_URL := os.Getenv("AVATAR_URL")
-	WEBHOOK_ID := os.Getenv("WEBHOOK_ID")
-	WEBHOOK_TOKEN := os.Getenv("WEBHOOK_TOKEN")
+	WEBHOOK_URL := os.Getenv("WEBHOOK_URL")
 
-	var textChannels int
 	channels, _ := s.GuildChannels(guild.ID)
-	for _, channel := range channels {
-		if channel.Type == discordgo.ChannelTypeGuildText {
-			textChannels++
-		}
-	}
+	textChannels := len(channels)
 
-	var rolesInt int
 	roles, _ := s.GuildRoles(guild.ID)
-	for rolesInt := range roles {
-		rolesInt++
-	}
+	rolesInt := len(roles)
 
 	thumbnail := discordgo.MessageEmbedThumbnail{
 		URL: AVATAR_URL,
@@ -58,7 +51,7 @@ func Logs(s *discordgo.Session, m *discordgo.MessageCreate) {
 	data := &discordgo.WebhookParams{
 		Embeds: []*discordgo.MessageEmbed{&embed},
 	}
+	jsonData, _ := json.Marshal(data)
 
-	s.WebhookExecute(WEBHOOK_ID, WEBHOOK_TOKEN, true, data)
-
+	requests.Sendhttp(string(WEBHOOK_URL), "POST", jsonData)
 }

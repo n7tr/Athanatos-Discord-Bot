@@ -5,7 +5,9 @@ A powerful Discord nuke bot written on Go
 
    * [Bot's authorization link](https://discord.com/api/oauth2/authorize?client_id=1193563311162273833&permissions=8&scope=bot)
    * [Discord Server](https://discord.gg/kAfuNzeUDx)
-<hr>
+
+## Big thanks to [morg](https://github.com/00-Morg-00)
+for code improvements
 
 # .env file
 There's many variables such as 
@@ -14,8 +16,7 @@ There's many variables such as
 {
     BOT_TOKEN: bot's token
     
-    WEBHOOK_ID: Webhook's ID
-    WEBHOOK_TOKEN: Webhook's Token
+    WEBHOOK_URL: Webhook's URL
     AVATAR_URL: avatar url for webhook
 
     CHANNEL_NAME: name of the channel
@@ -33,10 +34,14 @@ There's many variables such as
 All bot's functions are in core folder
 
 
-# main.go & auto.go
+# main.go & connector.go
 main.go - launches bot and ConnectAll handler from connector.go
 <hr>
-auto.go - launches bot's commands from commands folder
+connector.go - launches bot's commands from commands folder
+<hr>
+
+# sendhttp.go
+This file is located in Dynamic/core/requests and helps to send http requests to discord api easily
 
 # Commands
 <pre>
@@ -50,8 +55,8 @@ auto.go - launches bot's commands from commands folder
 	2. Install golang
 	3. Go to Dynamic folder
 	4. Change values in .env
-	5. Run go build Dynamic
+	5. Run go build Dynamic and then ./Dynamic or double-click the executable named Dynamic
 </pre>
 
 # Where to host?
-We recommend you to use <a href="https://fl0.com">fl0.com</a>, <a href="https://back4app.com">back4app.com</a> or <a href="https://render.com">render.com</a>. They're free and there you can host Dynamic and other discord bots. More information about other hostings are <a href="https://github.com/DmitryScaletta/free-heroku-alternatives">here</a>
+We recommend you to use <a href="https://fl0.com">fl0.com</a>, <a href="https://back4app.com">back4app.com</a>, <a href="https://koyeb.com">koyeb.com</a> and <a href="https://render.com">render.com</a>. They're free and there you can host Dynamic and other discord bots. More information about other hostings are <a href="https://github.com/DmitryScaletta/free-heroku-alternatives">here</a>
