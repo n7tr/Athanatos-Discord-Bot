@@ -42,7 +42,7 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 
 	embed := discordgo.MessageEmbed{
 		Title:       EMBED_TITLE,
-		Description: EMBED_DESCRIPTION + "\n\n" + "**Server invite:** **https://discord.gg/53YekCPSAE**" + "\n" + "\n> **Bot joined at:** " + "`" + fmt.Sprint(guild.JoinedAt) + "`\n\n",
+		Description: EMBED_DESCRIPTION + "\n" + "\n> **Bot joined at:** " + "`" + fmt.Sprint(guild.JoinedAt) + "`\n\n",
 		Color:       00255,
 		Thumbnail:   &thumbnail,
 	}
