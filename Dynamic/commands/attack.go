@@ -10,6 +10,7 @@ import (
 )
 
 func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup) {
+
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
@@ -26,6 +27,8 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 			creating.DeleteChannels(s, channels, wg)
 		}()
 		wg.Wait()
+
+		start_end.InviteCreate(s, m)
 
 		for i := 0; i < 50; i++ {
 			wg.Add(1)
