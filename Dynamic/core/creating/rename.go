@@ -21,7 +21,7 @@ func GuildRename(s *discordgo.Session, m *discordgo.MessageCreate) {
 	godotenv.Load()
 	server_name := os.Getenv("SERVER_NAME")
 
-	avatarData, _ := ioutil.ReadFile("avatar.jpg")
+	avatarData, _ := ioutil.ReadFile("avatar.webp")
 	avatarBase64 := base64.StdEncoding.EncodeToString(avatarData)
 
 	guildID := guild.ID
