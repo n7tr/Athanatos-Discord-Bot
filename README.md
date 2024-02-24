@@ -46,6 +46,9 @@ connector.go - runs bot commands from commands folder
 # sendhttp.go
 This file is located in src/core/requests and helps to send http requests to Discord API easily
 
+# smooth.go
+This file is located in src/core/requests and helps to avoid rate-limits
+
 # Commands
 <pre>
 	The main command (.start) starts the nuking process. 
