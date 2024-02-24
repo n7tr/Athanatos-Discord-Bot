@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
@@ -30,9 +29,7 @@ func main() {
 	err = sess.Open()
 
 	//Set Status
-	t := time.Now()
-	elapsed := time.Since(t)
-	sess.UpdateStreamingStatus(0, "El Dynamic ["+fmt.Sprint(elapsed.Nanoseconds())+" ns]", "https://www.twitch.tv/404")
+	sess.UpdateStreamingStatus(0, ".start / Dynamic", "https://www.twitch.tv/404")
 
 	if err != nil {
 		log.Fatal(err)
