@@ -34,7 +34,6 @@ func main() {
 	elapsed := time.Since(t)
 	sess.UpdateStreamingStatus(0, "El Dynamic ["+fmt.Sprint(elapsed.Nanoseconds())+" ns]", "https://www.twitch.tv/404")
 
-
 	if err != nil {
 		log.Fatal(err)
 	}

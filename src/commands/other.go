@@ -21,14 +21,19 @@ func Leave(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 }
 
-func BanAll(s *discordgo.Session, m *discordgo.MessageCreate) {
+func BanAll(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
 	if m.Content == ".ban_all" {
 		s.ChannelMessageDelete(m.ChannelID, m.ID)
-		removing.MemberBan(s, m)
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			removing.MemberBan(s, m)
+		}()
+		wg.Wait()
 	}
 }
 
@@ -49,7 +54,7 @@ func LeaveEveryServer(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync
 			}
 		} else {
 			s.ChannelMessageDelete(m.ChannelID, m.ID)
-			s.ChannelMessageDelete(m.ChannelID, "Can't leave from all servers.")
+			s.ChannelMessageSend(m.ChannelID, "Can't leave from all servers.")
 		}
 	}
 }

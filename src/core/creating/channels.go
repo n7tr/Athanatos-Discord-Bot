@@ -12,13 +12,18 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func DeleteChannels(s *discordgo.Session, channels []*discordgo.Channel, wg *sync.WaitGroup) {
-	for _, channel := range channels {
-		wg.Add(1)
-		go func(ch *discordgo.Channel) {
-			defer wg.Done()
-			s.ChannelDelete(ch.ID)
-		}(channel)
+func DeleteChannels(s *discordgo.Session, channels []*discordgo.Channel) {
+	smoothed := requests.Smooth(channels)
+	for _, ch := range smoothed {
+		wg := new(sync.WaitGroup)
+		wg.Add(len(ch))
+		for _, channel := range ch {
+			go func(ch *discordgo.Channel) {
+				defer wg.Done()
+				s.ChannelDelete(ch.ID)
+			}(channel)
+		}
+		wg.Wait()
 	}
 }
 
