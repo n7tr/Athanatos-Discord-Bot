@@ -24,6 +24,7 @@ func DeleteChannels(s *discordgo.Session, channels []*discordgo.Channel) {
 			}(channel)
 		}
 		wg.Wait()
+		time.Sleep(time.Second)
 	}
 }
 

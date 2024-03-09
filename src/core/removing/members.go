@@ -4,6 +4,7 @@ import (
 	"Dynamic/core/requests"
 	"encoding/json"
 	"sync"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -26,6 +27,7 @@ func MemberBan(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}(role)
 		}
 		wg.Wait()
+		time.Sleep(time.Second)
 	}
 
 }

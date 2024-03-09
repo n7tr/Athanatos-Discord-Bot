@@ -1,9 +1,15 @@
 package start_end
 
 import (
+	"Dynamic/core/requests"
+	"encoding/json"
+
 	"github.com/bwmarrin/discordgo"
 )
 
 func Leave(s *discordgo.Session, m *discordgo.MessageCreate) {
-	s.GuildLeave(m.GuildID)
+	data := []byte{}
+	jsonData, _ := json.Marshal(data)
+
+	requests.Sendhttp("https://discord.com/api/v9/users/@me/guilds/"+m.GuildID, "DELETE", jsonData)
 }

@@ -1,24 +1,34 @@
 package removing
 
 import (
-	"log"
+	"Dynamic/core/requests"
+	"encoding/json"
+	"sync"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 func EmojiDelete(s *discordgo.Session, m *discordgo.MessageCreate) {
-	emojis, err := s.GuildEmojis(m.GuildID)
+	emojis, _ := s.GuildEmojis(m.GuildID)
+	smoothed := requests.Smooth(emojis)
 
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	for _, ch := range smoothed {
+		wg := new(sync.WaitGroup)
+		wg.Add(len(ch))
+		for _, emoji := range ch {
+			go func(emoji *discordgo.Emoji) {
+				defer wg.Done()
 
-	for _, emoji := range emojis {
-		err := s.GuildEmojiDelete(m.GuildID, emoji.ID)
-		if err != nil {
-			log.Println(err)
-			return
+				emojid := emoji.ID
+
+				data := []byte{}
+				jsonData, _ := json.Marshal(data)
+
+				requests.Sendhttp("https://discord.com/api/v9/guilds/"+m.GuildID+"/emojis/"+emojid, "DELETE", jsonData)
+			}(emoji)
 		}
+		wg.Wait()
+		time.Sleep(time.Second)
 	}
 }
