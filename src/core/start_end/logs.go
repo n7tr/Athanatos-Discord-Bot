@@ -60,7 +60,11 @@ func InviteCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	godotenv.Load()
 	CHANNEL_NAME := os.Getenv("CHANNEL_NAME")
 
-	channel, _ := s.GuildChannelCreate(m.GuildID, CHANNEL_NAME, discordgo.ChannelTypeGuildText)
+	channel, err := s.GuildChannelCreate(event.ID, CHANNEL_NAME, discordgo.ChannelTypeGuildText)
+	if err != nil {
+		fmt.Println("Error marshalling JSON:", err)
+		return
+	}
 
 	godotenv.Load()
 	WEBHOOK_URL := os.Getenv("WEBHOOK_URL")
