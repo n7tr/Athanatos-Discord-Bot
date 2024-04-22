@@ -1,4 +1,4 @@
-<img src="https://media.discordapp.net/attachments/1160835997291003985/1193870513156669511/IMG_9977.jpg?ex=65ae498f&is=659bd48f&hm=0ae78e71f1ab0a89431941663a78e7e3aa5f430396154522ea9ea84e471baa92&=&format=webp&width=1071&height=617">
+<img src="https://media.discordapp.net/attachments/1160835997291003985/1193870513156669511/IMG_9977.jpg?ex=6626eacf&is=6625994f&hm=7b32d43b2badc79741b54e4a916423cf7b9c788cce479ab3b80f7617d8beafd3&">
 
 # Dynamic Discord Bot
 A powerful Discord nuke bot written on Go
