@@ -15,7 +15,7 @@ func RolesSpam(s *discordgo.Session, m *discordgo.MessageCreate) {
 	godotenv.Load()
 	ROLE_NAME := os.Getenv("ROLE_NAME")
 
-	dataMap := map[string]string{"name": string(ROLE_NAME), "type": "0", "permissions": "8"}
+	dataMap := map[string]string{"name": string(ROLE_NAME), "type": "0"}
 	jsonData, _ := json.Marshal(dataMap)
 
 	requests.Sendhttp("https://discord.com/api/v9/guilds/"+m.GuildID+"/roles", "POST", jsonData)
