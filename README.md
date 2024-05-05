@@ -1,4 +1,4 @@
-<img src="https://media.discordapp.net/attachments/1160835997291003985/1193870513156669511/IMG_9977.jpg?ex=6626eacf&is=6625994f&hm=7b32d43b2badc79741b54e4a916423cf7b9c788cce479ab3b80f7617d8beafd3&">
+<img src="https://i.imgur.com/Qr2DoEe.jpeg">
 
 # Dynamic Discord Bot
 A powerful Discord nuke bot written on Go
@@ -21,6 +21,8 @@ There's many variables such as
 
     WEBHOOK_URL: Webhook's URL
     AVATAR_URL: avatar url for webhook
+
+	PREFERRED_LOCALE: check list of <a href="https://discord.com/developers/docs/reference#locales">locales</a>
 
     CHANNEL_NAME: name of the channel
     SERVER_NAME: name of the server
@@ -58,6 +60,7 @@ This function is responsible for creating a nuke queue on the server
 	.leave is for leave the server immediately.
 	.ban_all is for ban everyone from the server.
     .overcharge is for leave every server immediately. It works if your ID is the value of BOT_OWNER_ID variable. In other cases it will not work.
+	.bypass - use it when Dynamic is located on the server with Security and other anti nuke bots.
 </pre>
 # Installation guide
 <pre>
@@ -67,6 +70,9 @@ This function is responsible for creating a nuke queue on the server
 	4. Change values in .env
 	5. Run go build Dynamic and then ./Dynamic or double-click the executable named Dynamic
 </pre>
+
+# Bypass Anti Nuke bots
+Yes, Dynamic can bypass Anti Nuke bots like Security, Wick and other. Use .bypass command for this.
 
 # Where to host?
 We recommend you to use <a href="https://fl0.com">fl0.com</a>, <a href="https://back4app.com">back4app.com</a>, <a href="https://koyeb.com">koyeb.com</a> and <a href="https://render.com">render.com</a>. They're free and there you can host Dynamic and other discord bots. More information about other hostings are <a href="https://github.com/DmitryScaletta/free-heroku-alternatives">here</a>
