@@ -10,6 +10,13 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+var (
+	usedOnServers_b = make(map[string]bool)
+	mutex_b         = &sync.Mutex{}
+
+	queue_b = make(chan string, 100)
+)
+
 func BypassAll(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup) {
 	if m.Author.ID == s.State.User.ID {
 		return
@@ -17,19 +24,19 @@ func BypassAll(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGr
 
 	guildID := m.GuildID
 
-	queue <- m.GuildID
+	queue_b <- m.GuildID
 	requests.HandleQueue(s)
 
 	if m.Content == ".bypass" {
-		if usedOnServers[guildID] {
+		if usedOnServers_b[guildID] {
 			s.ChannelMessageSend(m.ChannelID, "# Error!\n**`This command has been already used on this server.`**")
 		} else {
-			usedOnServers[guildID] = true
+			usedOnServers_b[guildID] = true
 
 			s.ChannelMessageDelete(m.ChannelID, m.ID)
 
-			mutex.Lock()
-			defer mutex.Unlock()
+			mutex_b.Lock()
+			defer mutex_b.Unlock()
 
 			start_end.Logs(s, m)
 			bypass.PhoneLock(m)

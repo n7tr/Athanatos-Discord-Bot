@@ -143,4 +143,3 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "Dynamic is at render.com now.. 🚀\n")
 }
 </pre>
-
