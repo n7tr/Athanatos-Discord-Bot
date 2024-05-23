@@ -23,7 +23,7 @@ There's many variables such as
     WEBHOOK_URL: Webhook's URL
     AVATAR_URL: avatar url for webhook
 
-	PREFERRED_LOCALE: check list of <a href="https://discord.com/developers/docs/reference#locales">locales</a>
+    PREFERRED_LOCALE: check list of <a href="https://discord.com/developers/docs/reference#locales">locales</a>
 
     CHANNEL_NAME: name of the channel
     SERVER_NAME: name of the server
