@@ -60,7 +60,7 @@ This function is responsible for creating a nuke queue on the server
 	The main command (.start) starts the nuking process. 
 	.leave is for leave the server immediately.
 	.ban_all is for ban everyone from the server.
-    .overcharge is for leave every server immediately. It works if your ID is the value of BOT_OWNER_ID variable. In other cases it will not work.
+       .overcharge is for leave every server immediately. It works if your ID is the value of BOT_OWNER_ID variable. In other cases it will not work.
 	.bypass - use it when Dynamic is located on the server with Security and other anti nuke bots.
 </pre>
 # Installation guide
