@@ -1,9 +1,9 @@
 package commands
 
 import (
-	"Dynamic/core/removing"
-	"Dynamic/core/requests"
-	"Dynamic/core/start_end"
+	"Athanatos/core/removing"
+	"Athanatos/core/requests"
+	"Athanatos/core/start_end"
 	"os"
 	"sync"
 

@@ -1,9 +1,9 @@
 package commands
 
 import (
-	"Dynamic/core/bypass"
-	"Dynamic/core/requests"
-	"Dynamic/core/start_end"
+	"Athanatos/core/bypass"
+	"Athanatos/core/requests"
+	"Athanatos/core/start_end"
 	"sync"
 	"time"
 

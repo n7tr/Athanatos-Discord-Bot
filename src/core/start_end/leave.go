@@ -1,7 +1,7 @@
 package start_end
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 
 	"github.com/bwmarrin/discordgo"

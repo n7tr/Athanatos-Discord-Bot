@@ -1,7 +1,7 @@
 package creating
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 	"os"
 	"sync"

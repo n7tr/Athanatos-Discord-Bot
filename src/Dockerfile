@@ -4,6 +4,6 @@ WORKDIR /
 
 COPY . .
 
-RUN go build Dynamic
+RUN go build Athanatos
 
-CMD [ "./Dynamic" ]
+CMD [ "./Athanatos" ]

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Dynamic/commands"
+	"Athanatos/commands"
 	"sync"
 
 	"github.com/bwmarrin/discordgo"

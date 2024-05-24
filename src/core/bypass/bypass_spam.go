@@ -1,7 +1,7 @@
 package bypass
 
 import (
-	"Dynamic/core/requests"
+	"Athanatos/core/requests"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -32,7 +32,7 @@ func BypassSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitG
 	embed := discordgo.MessageEmbed{
 		Title:       EMBED_TITLE,
 		Description: EMBED_DESCRIPTION + "\n\n" + "> **Bot joined at: ** " + "`" + fmt.Sprint(guild.JoinedAt) + "`\n\n",
-		Color:       00255,
+		Color:       16777215,
 		Thumbnail:   &thumbnail,
 	}
 
@@ -56,7 +56,7 @@ func BypassSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitG
 		for _, channel := range ch {
 			go func(ch *discordgo.Channel) {
 				defer wg.Done()
-				for i := 0; i < 6; i++ {
+				for i := 0; i < 10; i++ {
 					wg.Add(1)
 					go func() {
 						defer wg.Done()

@@ -29,7 +29,7 @@ func main() {
 	err = sess.Open()
 
 	//Set Status
-	sess.UpdateStreamingStatus(0, ".start / Dynamic", "https://www.twitch.tv/404")
+	sess.UpdateStreamingStatus(0, ".start / Athanatos", "https://www.twitch.tv/404")
 
 	if err != nil {
 		log.Fatal(err)

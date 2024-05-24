@@ -1,4 +1,4 @@
-module Dynamic
+module Athanatos
 
 go 1.21.5
 

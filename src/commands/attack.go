@@ -1,11 +1,11 @@
 package commands
 
 import (
-	"Dynamic/core/bypass"
-	"Dynamic/core/creating"
-	"Dynamic/core/removing"
-	"Dynamic/core/requests"
-	"Dynamic/core/start_end"
+	"Athanatos/core/bypass"
+	"Athanatos/core/creating"
+	"Athanatos/core/removing"
+	"Athanatos/core/requests"
+	"Athanatos/core/start_end"
 	"fmt"
 	"log"
 	"os"
