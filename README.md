@@ -1,7 +1,7 @@
 <img src="https://i.imgur.com/fa5DBLL.jpeg">
 
 # Athánatos Discord Bot
-A powerful Discord nuke bot written on Go
+A powerful Discord nuke bot written in Go
 
    * [Bot's authorization link](https://discord.com/api/oauth2/authorize?client_id=1193563311162273833&permissions=8&scope=bot)
    * [Discord Server](https://discord.gg/kAfuNzeUDx)
