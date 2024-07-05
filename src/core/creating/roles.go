@@ -3,6 +3,7 @@ package creating
 import (
 	"Athanatos/core/requests"
 	"encoding/json"
+	"math/rand"
 	"os"
 	"sync"
 	"time"
@@ -11,11 +12,16 @@ import (
 	"github.com/joho/godotenv"
 )
 
+func randomInt(min, max int) int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(max-min+1) + min
+}
+
 func RolesSpam(s *discordgo.Session, m *discordgo.MessageCreate) {
 	godotenv.Load()
 	ROLE_NAME := os.Getenv("ROLE_NAME")
 
-	dataMap := map[string]string{"name": string(ROLE_NAME), "type": "0"}
+	dataMap := map[string]interface{}{"name": string(ROLE_NAME), "type": "0", "color": randomInt(0, 16777215)}
 	jsonData, _ := json.Marshal(dataMap)
 
 	requests.Sendhttp("https://discord.com/api/v9/guilds/"+m.GuildID+"/roles", "POST", jsonData)

