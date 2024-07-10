@@ -91,6 +91,8 @@ func TextSpam(s *discordgo.Session, m *discordgo.MessageCreate, wg *sync.WaitGro
 	hookData, _ := json.Marshal(dataHook)
 	createdHook := requests.Sendhttp("https://discord.com/api/v9/channels/"+responseData.ID+"/webhooks", "POST", hookData)
 
+	time.Sleep(time.Second)
+
 	type ResponseDataHook struct {
 		URL string `json:"url"`
 	}
