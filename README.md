@@ -3,7 +3,8 @@
 # Athánatos Discord Bot
 A powerful Discord nuke bot written in Go
 
-   * [Bot's authorization link](https://discord.com/api/oauth2/authorize?client_id=1193563311162273833&permissions=8&scope=bot)
+   * [Blood Group's website](https://blood-group.vercel.app)
+   * [Athanatos' website](https://athanatos-bot.vercel.app/)
    * [Discord Server](https://discord.gg/SnkQ8S5kRz)
 
 ## Big thanks to [morg](https://github.com/00-Morg-00)
